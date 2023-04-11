@@ -1,0 +1,54 @@
+.containerGeral {
+    background-color: whitesmoke;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gameContainer {
+    /* border: solid 1px red; */
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+}
+
+.controlContainer {
+    /* border: solid 1px red; */
+    /* height: 5rem; */
+    /* width: 90%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 5rem;
+}
+
+.controlButtonsContainer {
+    display: flex;
+    gap: 1rem;
+}
+
+.controlContainer button {
+    width: 10rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: larger;
+    border: solid 1px black;
+    border-radius: 1rem;
+    outline: none;
+    box-shadow: 3px 3px 0px 1px black;
+}
+
+@media (orientation: landscape) {
+    .gameContainer {
+        flex-direction: row;
+    }
+}
+

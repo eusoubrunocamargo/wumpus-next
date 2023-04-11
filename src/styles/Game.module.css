@@ -1,0 +1,66 @@
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    position: relative;
+}
+
+.roomStyle {
+    width: 8rem;
+    height: 8rem;
+    border: solid 0.1rem black; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.safePath {
+    background-color: gold;
+}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 844px) 
+  and (orientation: portrait) {
+    /* estilos para iPhone 12 em portrait */
+    .gridContainer {
+        grid-template-columns: repeat(4,1fr);
+    }
+}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 844px) 
+  and (orientation: landscape) {
+    /* estilos para iPhone 12 em landscape */
+    .gridContainer {
+        grid-template-columns: repeat(4,1fr);
+    }
+}
+
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) {
+    /* estilos para iPad em portrait */
+    .gridContainer {
+        grid-template-columns: repeat(6,1fr);
+    }
+}
+
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) {
+    /* estilos para iPad em landscape */
+    .gridContainer {
+        grid-template-columns: repeat(6,1fr);
+    }
+}
+
+
+@media screen and (min-width: 1025px) {
+    .gridContainer {
+        grid-template-columns: repeat(8 ,1fr);
+    }
+}
+
