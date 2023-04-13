@@ -18,9 +18,10 @@ export default function Play () {
         setSafePaths,
         setWumpusPosition, 
         setPitPosition,
+        setPlayerPosition,
     } = useContext(PositionContext);
 
-    const { resetGame } = useContext(GameStateContext);
+    const { resetGame , setGameState} = useContext(GameStateContext);
 
     const handleSair = () => {
         resetGame();
@@ -28,6 +29,10 @@ export default function Play () {
     };
 
     const populateMap = () => {
+
+        //aciona a cobertura das células e posiciona o player em 0,0
+        setPlayerPosition({ x: 0, y: 0});
+        setGameState(true);
 
         //posiciona o ouro a 3 casas de distância do Player
         const newGoldPosition = placeGold(gridSize);

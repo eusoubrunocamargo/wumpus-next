@@ -12,7 +12,8 @@ export const GameStateProvider = ({children}) => {
         setGoldPosition,
         setSafePaths,
         setWumpusPosition,
-        setPitPosition
+        setPitPosition,
+        setVisitedCells,
     } = useContext(PositionContext);
 
     const resetGame = () => {
@@ -21,6 +22,8 @@ export const GameStateProvider = ({children}) => {
         setSafePaths([]);
         setWumpusPosition([]);
         setPitPosition([]);
+        setVisitedCells(new Set());
+        setGameState(false);
     };
     
     return (

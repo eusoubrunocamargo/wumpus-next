@@ -16,12 +16,14 @@ const GameMap = () => {
     const { 
         playerPosition, 
         goldPosition, 
-        safePaths,
+        // safePaths,
         wumpusPosition, 
-        pitPosition 
+        pitPosition,
+        visitedCells,
+        setVisitedCells,
     } = useContext(PositionContext);
     
-    const { resetGame } = useContext(GameStateContext);
+    const { resetGame, gameState } = useContext(GameStateContext);
 
     const rooms = [];
 
@@ -29,15 +31,31 @@ const GameMap = () => {
         return (playerPosition.x === x && playerPosition.y === y);
     }
 
+    const isVisited = (x,y) => {
+        return visitedCells.has(`${x}-${y}`);
+    };
+
+    const maskedCell = (x,y) => {
+        return !isVisited(x,y)?{
+            backgroundColor: 'gray',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            zIndex: 1,
+        } : {};
+    };
+
     const isGoldPosition = (x,y) => {
         return (goldPosition.x === x && goldPosition.y === y);
     };
 
-    const isSafePath = (x,y) => {
-        return safePaths.some((path) => {
-            return path.some((cell) => cell.x === x && cell.y === y);
-        });
-    };
+    // const isSafePath = (x,y) => {
+    //     return safePaths.some((path) => {
+    //         return path.some((cell) => cell.x === x && cell.y === y);
+    //     });
+    // };
 
     const isWumpusPosition = (x,y) => {
         return wumpusPosition.some((pos) => pos.x === x && pos.y === y);
@@ -87,6 +105,12 @@ const GameMap = () => {
     };
 
     useEffect(() => {
+        if(gameState){
+        setVisitedCells((prev) => {
+            const newVisited = new Set(prev);
+            newVisited.add(`${playerPosition.x}-${playerPosition.y}`);
+            return newVisited;
+        })}
         if(isFindGold()){
             resetGame();
             router.push('/win');
@@ -102,7 +126,7 @@ const GameMap = () => {
             
             let content = ' ';
 
-            const isSafe = isSafePath(x,y);
+            // const isSafe = isSafePath(x,y);
 
             if(isPlayerPosition(x,y)){
                 content = <Image style={{ position: 'absolute', left: 0, marginLeft: '0.3rem'}}alt='character' priority src='/swordsman.png' width={50} height={50}></Image>
@@ -117,7 +141,7 @@ const GameMap = () => {
             }
 
             if(isPitPosition(x,y)) {
-                content = <Image alt='pit' priority src='/hole.png' width={80} height={80}></Image>
+                content = <Image alt='pit' priority src='/hole.png' width={78} height={78}></Image>
             }
 
             if(isAdjacentWumpus( x , y )){
@@ -152,8 +176,12 @@ const GameMap = () => {
 
             rooms.push(<div 
                 key={`${x}-${y}`} 
-                className={`${gamestyles.roomStyle} ${isSafe ? gamestyles.safePath : ''}`}
-                style={{ position: 'relative'}}>{content}</div>
+                // className={`${gamestyles.roomStyle} ${isSafe ? gamestyles.safePath : ''}`}
+                className={gamestyles.roomStyle}
+                style={{ position: 'relative'}}>
+                    {content}
+                    {gameState && <div style={maskedCell(x,y)}></div>}
+                    </div>
             );
         }
     }

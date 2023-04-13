@@ -9,6 +9,7 @@ export const PositionProvider = ({children}) => {
     const [safePaths, setSafePaths] = useState([]);
     const [wumpusPosition, setWumpusPosition] = useState([]);
     const [pitPosition, setPitPosition] = useState([]);
+    const [visitedCells, setVisitedCells] = useState(new Set());
     
     return (
         <PositionContext.Provider 
@@ -22,7 +23,9 @@ export const PositionProvider = ({children}) => {
             wumpusPosition,
             setWumpusPosition,
             pitPosition,
-            setPitPosition
+            setPitPosition,
+            visitedCells,
+            setVisitedCells,
             }}>
             {children}
         </PositionContext.Provider>
